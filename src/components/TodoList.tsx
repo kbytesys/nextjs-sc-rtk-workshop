@@ -13,6 +13,7 @@ const TodoList = () => {
   const [data, setData] = useState<GetTodosResponse | null>(null);
 
   useEffect(() => {
+    console.log("test fetch todos list");
     getTodos(page ? parseInt(page) : 1).then((res) => setData(res));
   }, [page]);
 
@@ -27,10 +28,10 @@ const TodoList = () => {
   if (!data) return <>loading...</>;
 
   // callback that triggers a server reload
-  const nextPageCallback = () => router.push(`/todos?page=${data.page + 1}`);
+  // const nextPageCallback = () => router.push(`/todos?page=${data.page + 1}`);
 
   // callback that not triggers a server reload
-  // const nextPageCallback = () => window.history.pushState(null, "", `/todos?page=${data.page + 1}`);
+  const nextPageCallback = () => window.history.pushState(null, "", `/todos?page=${data.page + 1}`);
 
   return (
     <div>

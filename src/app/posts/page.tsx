@@ -13,6 +13,12 @@ export default async function PostsListPage({
   const { page } = await searchParams;
   const posts = await getPosts(page ? parseInt(page as string) : 1);
 
+  /*
+   * Warning: if you use a per-route state, you must follow this
+   * link https://redux-toolkit.js.org/usage/nextjs#per-route-state too
+   * if you use the redux state selectors and the data does not update
+   */
+
   return (
     <StoreProvider postsList={posts}>
       <PostList initialData={posts} />

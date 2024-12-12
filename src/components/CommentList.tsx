@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useFetchCommentsQuery } from "@/lib/services/comments";
 
 const CommentList = () => {
+  console.log("test trigger comment list rendering");
   const searchParams = useSearchParams();
   const page = searchParams.get("page");
 

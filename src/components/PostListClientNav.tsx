@@ -32,6 +32,10 @@ const PostListClientNav = () => {
 
   if (!postslist) return <>loading...</>;
 
+  // callback that triggers a server reload
+  // WARNING! because of the rehydratation the component will trigger the fetch into the useEffect
+  // const nextPageCallback = () => router.push(`/posts-client-nav?page=${postslist.page + 1}`);
+
   // callback that not triggers a server reload
   const nextPageCallback = () => window.history.pushState(null, "", `/posts-client-nav?page=${postslist.page + 1}`);
 

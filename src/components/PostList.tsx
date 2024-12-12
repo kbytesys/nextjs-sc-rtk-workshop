@@ -1,10 +1,8 @@
 "use client";
 
 import { GetPostsResponse } from "@/lib/gorestapi";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { useAppStore } from "@/lib/rtksc/hooks";
-import { initializePostList } from "@/lib/rtksc/posts/postsSlice";
 
 export interface PostsListProps {
   initialData: GetPostsResponse;
@@ -20,16 +18,6 @@ const PostList = ({ initialData }: PostsListProps) => {
       console.log("test cleanup post list");
     };
   }, []);
-
-  // Initialize the store with the product information (we need this only on pre-render scenarios when the client
-  // component doesn't fetch the data when a route changes. With the new route, the provider doesn't update the store)
-  const store = useAppStore();
-  const initialized = useRef(false);
-  if (!initialized.current) {
-    console.log("init the store from the PostsList");
-    store.dispatch(initializePostList(initialData));
-    initialized.current = true;
-  }
 
   if (!initialData) return <>loading...</>;
 
